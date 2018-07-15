@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="https://msyml.github.io">
   <title>安卓关于屏幕适配的一种解决方案 | 抹上一抹凉</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文部分概念以及排版参考自Android屏幕适配全攻略(最权威的官方适配指导)解决方案来自于老师讲解。">
+  <meta name="description" content="本文部分概念以及排版参考自Android屏幕适配全攻略(最权威的官方适配指导)解决方案来自于阅读源码得到的思路。">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安卓关于屏幕适配的一种解决方案">
 <meta property="og:url" content="https://msyml.github.io/2018/07/14/Android-Screen-Adaptation/index.html">
 <meta property="og:site_name" content="抹上一抹凉">
-<meta property="og:description" content="本文部分概念以及排版参考自Android屏幕适配全攻略(最权威的官方适配指导)解决方案来自于老师讲解。">
+<meta property="og:description" content="本文部分概念以及排版参考自Android屏幕适配全攻略(最权威的官方适配指导)解决方案来自于阅读源码得到的思路。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="https://msyml.github.io/2018/07/14/Android-Screen-Adaptation/p1080x1920.png">
 <meta property="og:image" content="https://msyml.github.io/2018/07/14/Android-Screen-Adaptation/p480x800.png">
@@ -24,10 +24,10 @@
 <meta property="og:image" content="https://msyml.github.io/2018/07/14/Android-Screen-Adaptation/480x800.png">
 <meta property="og:image" content="https://msyml.github.io/2018/07/14/Android-Screen-Adaptation/720x1280.png">
 <meta property="og:image" content="https://msyml.github.io/2018/07/14/Android-Screen-Adaptation/1440x2560.png">
-<meta property="og:updated_time" content="2018-07-15T14:15:13.273Z">
+<meta property="og:updated_time" content="2018-07-15T14:16:05.651Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓关于屏幕适配的一种解决方案">
-<meta name="twitter:description" content="本文部分概念以及排版参考自Android屏幕适配全攻略(最权威的官方适配指导)解决方案来自于老师讲解。">
+<meta name="twitter:description" content="本文部分概念以及排版参考自Android屏幕适配全攻略(最权威的官方适配指导)解决方案来自于阅读源码得到的思路。">
 <meta name="twitter:image" content="https://msyml.github.io/2018/07/14/Android-Screen-Adaptation/p1080x1920.png">
   
     <link rel="alternative" href="/atom.xml" title="抹上一抹凉" type="application/atom+xml">
@@ -189,7 +189,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本文部分概念以及排版参考自<a href="https://blog.csdn.net/zhaokaiqiang1992/article/details/45419023#dpdipdpisppx" target="_blank" rel="noopener">Android屏幕适配全攻略(最权威的官方适配指导)</a><br>解决方案来自于老师讲解。<br><a id="more"></a><br><a href="#first">为什么要进行屏幕适配</a><br><a href="#second">一些重要概念</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#second_first">屏幕尺寸</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#second_second">屏幕分辨率</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#second_third">屏幕像素密度</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#second_fourth">dp、dip、dpi、sp、px</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#second_fifht">mdpi、hdpi、xdpi、xxdpi</a><br><a href="#third">解决方案</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#third_first">项目之初</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#third_second">解决方案</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#third_third">最后结果</a></p>
+        <p>本文部分概念以及排版参考自<a href="https://blog.csdn.net/zhaokaiqiang1992/article/details/45419023#dpdipdpisppx" target="_blank" rel="noopener">Android屏幕适配全攻略(最权威的官方适配指导)</a><br>解决方案来自于阅读源码得到的思路。<br><a id="more"></a><br><a href="#first">为什么要进行屏幕适配</a><br><a href="#second">一些重要概念</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#second_first">屏幕尺寸</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#second_second">屏幕分辨率</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#second_third">屏幕像素密度</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#second_fourth">dp、dip、dpi、sp、px</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#second_fifht">mdpi、hdpi、xdpi、xxdpi</a><br><a href="#third">解决方案</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#third_first">项目之初</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#third_second">解决方案</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#third_third">最后结果</a></p>
 <p></p><h2 id="first">为什么要进行屏幕适配</h2>在我们学习如何进行屏幕适配之前，我们需要先了解下为什么Android需要进行屏幕适配。<br>由于Android系统的开放性，任何用户、开发者、OEM厂商、运营商都可以对Android进行定制，修改成他们想要的样子。<br>而随着支持Android系统的设备(手机、平板、电视、手表)的增多，设备碎片化、品牌碎片化、系统碎片化、传感器碎片化和屏幕碎片化的程度也在不断地加深。而我们今天要探讨的，则是对我们开发影响比较大的——屏幕的碎片化。<br>首先，我们先要了解几个重要的概念。<p></p>
 <p></p><h2 id="second">一些重要概念</h2><br>什么是屏幕尺寸、屏幕分辨率、屏幕像素密度？<br>什么是dp、dip、dpi、sp、px？他们之间的关系是什么？<br>什么是mdpi、hdpi、xdpi、xxdpi？如何计算和区分？<p></p>
 <p>在下面的内容中我们将介绍这些概念。</p>
