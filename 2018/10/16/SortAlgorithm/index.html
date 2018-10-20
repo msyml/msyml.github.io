@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://msyml.github.io">
-  <title>常用牌序算法总结 | 抹上一抹凉</title>
+  <title>常用牌序算法总结（一） | 抹上一抹凉</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、冒泡排序 二、选择排序 三、插入排序 希尔排序   四、归并排序 五、快速排序">
+  <meta name="description" content="一、冒泡排序 二、选择排序 三、插入排序 希尔排序   四、归并排序 原地归并的抽象方法 自顶向下的归并排序 自底向上的归并排序   五、快速排序 一些简单说明以及常用函数">
 <meta name="keywords" content="Algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常用牌序算法总结">
+<meta property="og:title" content="常用牌序算法总结（一）">
 <meta property="og:url" content="https://msyml.github.io/2018/10/16/SortAlgorithm/index.html">
 <meta property="og:site_name" content="抹上一抹凉">
-<meta property="og:description" content="一、冒泡排序 二、选择排序 三、插入排序 希尔排序   四、归并排序 五、快速排序">
+<meta property="og:description" content="一、冒泡排序 二、选择排序 三、插入排序 希尔排序   四、归并排序 原地归并的抽象方法 自顶向下的归并排序 自底向上的归并排序   五、快速排序 一些简单说明以及常用函数">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-10-18T06:32:43.241Z">
+<meta property="og:updated_time" content="2018-10-20T09:32:21.180Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="常用牌序算法总结">
-<meta name="twitter:description" content="一、冒泡排序 二、选择排序 三、插入排序 希尔排序   四、归并排序 五、快速排序">
+<meta name="twitter:title" content="常用牌序算法总结（一）">
+<meta name="twitter:description" content="一、冒泡排序 二、选择排序 三、插入排序 希尔排序   四、归并排序 原地归并的抽象方法 自顶向下的归并排序 自底向上的归并排序   五、快速排序 一些简单说明以及常用函数">
   
     <link rel="alternative" href="/atom.xml" title="抹上一抹凉" type="application/atom+xml">
   
@@ -166,7 +166,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      常用牌序算法总结
+      常用牌序算法总结（一）
     </h1>
   
 
@@ -187,8 +187,14 @@
 <li><a href="#希尔排序——基于插入排序的快速的排序算法">希尔排序</a></li>
 </ul>
 </li>
-<li><a href="#四、归并排序">四、归并排序</a></li>
+<li><a href="#四、归并排序">四、归并排序</a><ul>
+<li><a href="原地归并的抽象方法">原地归并的抽象方法</a></li>
+<li><a href="自顶向下的归并排序">自顶向下的归并排序</a></li>
+<li><a href="自底向上的归并排序">自底向上的归并排序</a></li>
+</ul>
+</li>
 <li><a href="#五、快速排序">五、快速排序</a></li>
+<li><a href="#一些简单说明以及常用函数">一些简单说明以及常用函数</a></li>
 </ul>
 <a id="more"></a>
 <h1 id="一、冒泡排序"><a href="#一、冒泡排序" class="headerlink" title="一、冒泡排序"></a>一、冒泡排序</h1><p>&nbsp;&nbsp;冒泡排序（英语：Bubble Sort）是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。</p>
@@ -304,9 +310,36 @@
 </tr>
 </tbody>
 </table>
-<h1 id="四、归并排序"><a href="#四、归并排序" class="headerlink" title="四、归并排序"></a>四、归并排序</h1><p>归并排序（英语：Merge sort，或mergesort），是创建在归并操作上的一种有效的排序算法，效率为 {\displaystyle O(n\log n)} {\displaystyle O(n\log n)}（大O符号）。1945年由约翰·冯·诺伊曼首次提出。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用，且各层分治递归可以同时进行。</p>
+<h1 id="四、归并排序"><a href="#四、归并排序" class="headerlink" title="四、归并排序"></a>四、归并排序</h1><p>&nbsp;&nbsp;要将一个数组排序，可以先（递归地）将它分成两半分别排序，然后将结果归并起来。你将会看到，归并排序最吸引人的性质是它能够保证将任意长度为N的数组排序所需时间和NlogN成正比；它的主要缺点则是它所需的额外空间和N成正比。</p>
+<h2 id="原地归并的抽象方法"><a href="#原地归并的抽象方法" class="headerlink" title="原地归并的抽象方法"></a>原地归并的抽象方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] aux;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> mid, <span class="keyword">int</span> hi)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = lo, j = mid+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> k = lo; k &lt;= hi; k++) &#123;<span class="comment">//将a[lo..hi]复制到aun[lo..hi]</span></span><br><span class="line">		aux[k] = a[k];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> k = lo; k &lt;= hi; k++) &#123;<span class="comment">//归并回到a[lo..hi]</span></span><br><span class="line">		<span class="keyword">if</span> (i &gt; mid) &#123;<span class="comment">//当左侧元素用尽时，取右边元素</span></span><br><span class="line">			a[k] = aux[j++];</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> (j &gt; hi) &#123;<span class="comment">//当右侧元素用尽时，取左边元素</span></span><br><span class="line">			a[k] = aux[i++];</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> (aux[j] &lt; aux[i]) &#123;<span class="comment">//右边当前元素小于左边当前元素，取右边元素</span></span><br><span class="line">			a[k] = aux[j++];</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;<span class="comment">//右边当前元素大于左边当前元素，取左边元素</span></span><br><span class="line">			a[k] = aux[i++];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自顶向下的归并排序"><a href="#自顶向下的归并排序" class="headerlink" title="自顶向下的归并排序"></a>自顶向下的归并排序</h2><p>&nbsp;&nbsp;下列代码基于原地归并的抽象实现了另一种递归归并，这也是应用高效算法设计当中分治思想的最典型的一个例子。这段代码是归纳证明算法能够正确地将数组排序的基础：如果它能够将两个子数组排序，他就能够通过归并两个子数组来将整个数组排序。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span>[] a)</span></span>&#123;</span><br><span class="line">	aux = <span class="keyword">new</span> <span class="keyword">int</span>[a.length];<span class="comment">//辅助数组，详见原地归并的抽象方法</span></span><br><span class="line">	sort(a, <span class="number">0</span>, a.length-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (hi &lt;= lo) &#123;<span class="comment">//只有一个数的就结束方法</span></span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid = (lo + hi)/<span class="number">2</span>;</span><br><span class="line">	sort(a, lo, mid);</span><br><span class="line">	sort(a, mid+<span class="number">1</span>, hi);</span><br><span class="line">	merge(a, lo, mid, hi);<span class="comment">//归并结果，详见原地归并的抽象方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;要对子数组a[lo..hi]进行排序，先将它分为a[lo..mid]和a[mid+1..hi]两部分，分别通过递归调用将他们单独排序，最后将有序的子数组归并为最终的排序结果。</p>
+<h2 id="自底向上的归并排序"><a href="#自底向上的归并排序" class="headerlink" title="自底向上的归并排序"></a>自底向上的归并排序</h2><p>&nbsp;&nbsp;递归实现的归并排序是算法设计中分治思想的典型应用。我们将一个大问题分割成小问题分别解决，然后用所有小问题的答案来解决整个大问题。尽管我们考虑的问题是归并两个大数组，实际上我们归并的数组大多数是非常小的。实现归并排序的另一种方法是先归并那些卫星数组，然后再成对归并得到的子数组，如此这般，知道我们将整个数组归并在一起。这种事先方法比标准递归方法所需要的代码量跟少。首先我们进行的是两两归并（把每个元素想象成一个大小为1的数组），然后是四四归并（将两个大小为2的数组归并成为一个有4个元素的数组），然后是八八的归并，一直下去。在每一轮的归并中，最后一次归并的第二个子数组可能比第一个子数组要小（但这对merge()方法不是问题），如果不是的话所有的归并中两个数组大小都应该一样，而在下一轮中子数组的大小会翻倍。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] a)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> N = a.length;</span><br><span class="line">	aux = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> sz = <span class="number">1</span>; sz &lt; N; sz+=sz) &#123;<span class="comment">//sz代表子数组大小</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> lo = <span class="number">0</span>; lo &lt; N-sz; lo+=sz+sz) &#123;<span class="comment">//lo子数组索引</span></span><br><span class="line">			merge(a, lo, lo+sz-<span class="number">1</span>, Math.min(lo+sz+sz-<span class="number">1</span>, N-<span class="number">1</span>));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;归并排序复杂度如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">时间复杂度（平均）</th>
+<th style="text-align:center">时间复杂度（最坏）</th>
+<th style="text-align:center">时间复杂度（最好）</th>
+<th style="text-align:center">空间复杂度</th>
+<th style="text-align:center">稳定性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">O(nlogn)</td>
+<td style="text-align:center">O(nlogn)</td>
+<td style="text-align:center">O(nlogn)</td>
+<td style="text-align:center">O(n)</td>
+<td style="text-align:center">稳定</td>
+</tr>
+</tbody>
+</table>
 <h1 id="五、快速排序"><a href="#五、快速排序" class="headerlink" title="五、快速排序"></a>五、快速排序</h1><p>快速排序（英语：Quicksort），又称划分交换排序（partition-exchange sort），简称快排，一种排序算法，最早由东尼·霍尔提出。在平均状况下，排序 {\displaystyle n} n个项目要 {\displaystyle \ O(n\log n)} {\displaystyle \ O(n\log n)}（大O符号）次比较。在最坏状况下则需要 {\displaystyle O(n^{2})} {\displaystyle O(n^{2})}次比较，但这种状况并不常见。事实上，快速排序 {\displaystyle \Theta (n\log n)} {\displaystyle \Theta (n\log n)}通常明显比其他算法更快，因为它的内部循环（inner loop）可以在大部分的架构上很有效率地达成。</p>
-
+<h1 id="一些简单说明以及常用函数"><a href="#一些简单说明以及常用函数" class="headerlink" title="一些简单说明以及常用函数"></a>一些简单说明以及常用函数</h1>
       
 
       
