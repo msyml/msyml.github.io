@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://msyml.github.io">
   <title>常用牌序算法总结（一） | 抹上一抹凉</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、冒泡排序 二、选择排序 三、插入排序 希尔排序   四、归并排序 原地归并的抽象方法 自顶向下的归并排序 自底向上的归并排序   五、快速排序 一些简单说明以及常用函数">
+  <meta name="description" content="一、冒泡排序 二、选择排序 三、插入排序 希尔排序   四、归并排序 原地归并的抽象方法 自顶向下的归并排序 自底向上的归并排序   五、快速排序 三向切分的快速排序   一些简单说明以及常用函数">
 <meta name="keywords" content="Algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用牌序算法总结（一）">
 <meta property="og:url" content="https://msyml.github.io/2018/10/16/SortAlgorithm/index.html">
 <meta property="og:site_name" content="抹上一抹凉">
-<meta property="og:description" content="一、冒泡排序 二、选择排序 三、插入排序 希尔排序   四、归并排序 原地归并的抽象方法 自顶向下的归并排序 自底向上的归并排序   五、快速排序 一些简单说明以及常用函数">
+<meta property="og:description" content="一、冒泡排序 二、选择排序 三、插入排序 希尔排序   四、归并排序 原地归并的抽象方法 自顶向下的归并排序 自底向上的归并排序   五、快速排序 三向切分的快速排序   一些简单说明以及常用函数">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-10-20T09:32:21.180Z">
+<meta property="og:updated_time" content="2018-10-21T02:55:37.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用牌序算法总结（一）">
-<meta name="twitter:description" content="一、冒泡排序 二、选择排序 三、插入排序 希尔排序   四、归并排序 原地归并的抽象方法 自顶向下的归并排序 自底向上的归并排序   五、快速排序 一些简单说明以及常用函数">
+<meta name="twitter:description" content="一、冒泡排序 二、选择排序 三、插入排序 希尔排序   四、归并排序 原地归并的抽象方法 自顶向下的归并排序 自底向上的归并排序   五、快速排序 三向切分的快速排序   一些简单说明以及常用函数">
   
     <link rel="alternative" href="/atom.xml" title="抹上一抹凉" type="application/atom+xml">
   
@@ -193,7 +193,10 @@
 <li><a href="自底向上的归并排序">自底向上的归并排序</a></li>
 </ul>
 </li>
-<li><a href="#五、快速排序">五、快速排序</a></li>
+<li><a href="#五、快速排序">五、快速排序</a><ul>
+<li><a href="三向切分的快速排序">三向切分的快速排序</a></li>
+</ul>
+</li>
 <li><a href="#一些简单说明以及常用函数">一些简单说明以及常用函数</a></li>
 </ul>
 <a id="more"></a>
@@ -338,7 +341,45 @@
 </tr>
 </tbody>
 </table>
-<h1 id="五、快速排序"><a href="#五、快速排序" class="headerlink" title="五、快速排序"></a>五、快速排序</h1><p>快速排序（英语：Quicksort），又称划分交换排序（partition-exchange sort），简称快排，一种排序算法，最早由东尼·霍尔提出。在平均状况下，排序 {\displaystyle n} n个项目要 {\displaystyle \ O(n\log n)} {\displaystyle \ O(n\log n)}（大O符号）次比较。在最坏状况下则需要 {\displaystyle O(n^{2})} {\displaystyle O(n^{2})}次比较，但这种状况并不常见。事实上，快速排序 {\displaystyle \Theta (n\log n)} {\displaystyle \Theta (n\log n)}通常明显比其他算法更快，因为它的内部循环（inner loop）可以在大部分的架构上很有效率地达成。</p>
+<h1 id="五、快速排序"><a href="#五、快速排序" class="headerlink" title="五、快速排序"></a>五、快速排序</h1><p>&nbsp;&nbsp;快速排序是一种分治的排序算法。它将一个数组分成两个数组，将两部分独立地排序。快速排序和归并排序时互补的：<br>&nbsp;&nbsp;&nbsp;&nbsp;归并排序将数组分成两个子数组分别排序，并将有序的子数组归并以将整个数组排序；<br>&nbsp;&nbsp;&nbsp;&nbsp;快速排序将数组排序的方式则是当两个子数组都有序时整个数组也就自然有序了。<br>在第一种情况中，递归调用发生在处理整个数组之前；在第二种情况中，递归调用发生在处理整个数组之后。在归并排序中，一个数组被等分成两半；在快速排序中，切分（partition）的位置取决于数组的内容。</p>
+<p>&nbsp;&nbsp;以下是快速排序的java代码实现如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (hi &lt;= lo) &#123;<span class="comment">//只有一个数则跳出</span></span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> j = partition(a, lo ,hi);<span class="comment">//切分，详下部分代码</span></span><br><span class="line">	quickSort(a, lo, j-<span class="number">1</span>);<span class="comment">//将左半部分排序</span></span><br><span class="line">	quickSort(a, j+<span class="number">1</span>, hi);<span class="comment">//将右半部分排序</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;快速排序递归地将子数组a[lo..hi]牌，先用partitino()方法将a[j]放到一个合适位置，然后再用递归调用将其他位置的元素排序。该方法的关键在于切分，这个过程使得数组满足下面三个条件：</p>
+<ol>
+<li>对于某个j,a[j]已经锁定；</li>
+<li>a[lo]到a[j-1]中的所有元素都不大于a[j];</li>
+<li>a[j+1]到a[hi]中的所有元素都不小于a[j]；</li>
+</ol>
+<p>&nbsp;&nbsp;以下是快速排序的切分代码实现如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = lo, j = hi+<span class="number">1</span>;<span class="comment">//左右扫描指针</span></span><br><span class="line">	<span class="keyword">int</span> v = a[lo];<span class="comment">//切分元素（取第一个元素）</span></span><br><span class="line">	<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;<span class="comment">//不达到break的条件就一直执行</span></span><br><span class="line">		<span class="keyword">while</span>(a[++i] &lt; v)&#123;</span><br><span class="line">			<span class="keyword">if</span> (i == hi) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span>(v &lt; a[--j])&#123;</span><br><span class="line">			<span class="keyword">if</span> (j == lo) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (i &gt;= j) &#123;<span class="comment">//左右指针相遇</span></span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		swap(a, i, j);</span><br><span class="line">	&#125;</span><br><span class="line">	swap(a, lo, j);</span><br><span class="line">	<span class="keyword">return</span> j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;这段代码按照a[lo]的值v进行切分，当指针i和j相遇时主循环退出。在循环中，a[i]小于v时我们增大i，a[j]大于v时我们减小j，然后交换a[i]和a[j]来保证i左侧的元素都不大于v，j右侧的元素都不小于v。当指针相遇时交换a[lo]和a[j]，切分结束（这样切分值就留在a[j]）中了。</p>
+<p>&nbsp;&nbsp;快速排序复杂度如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">时间复杂度（平均）</th>
+<th style="text-align:center">时间复杂度（最坏）</th>
+<th style="text-align:center">时间复杂度（最好）</th>
+<th style="text-align:center">空间复杂度</th>
+<th style="text-align:center">稳定性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">O(nlogn)</td>
+<td style="text-align:center">O(n<sup>2</sup>)</td>
+<td style="text-align:center">O(nlogn)</td>
+<td style="text-align:center">O(nlogn)</td>
+<td style="text-align:center">不稳定</td>
+</tr>
+</tbody>
+</table>
+<h2 id="三向切分的快速排序"><a href="#三向切分的快速排序" class="headerlink" title="三向切分的快速排序"></a>三向切分的快速排序</h2><p>&nbsp;&nbsp;三向切分的快速排序中的切分代码极为简洁。它从左到右遍历数组一次，维护一个指针lt使得a[lo..lt-1]中的元素都小于v，一个指针gt使得a[gt+1..hi]中的元素都大于v，一个指针i使得a[lt..i-1]中的元素都等于v，a[i..gt]中的元素都还未确定。一开始i和lo相等，我们对a[i]进行三向比较来处理以下情况：</p>
+<ol>
+<li>a[i]小于v，将a[lt]和a[i]交换，将lt和i加一；</li>
+<li>a[i]大于v，将a[gt]和a[i]交换，将gt减一；</li>
+<li>a[i]等于v，将i加一；</li>
+</ol>
+<p>&nbsp;&nbsp;三向切分的快速排序实现如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (hi &lt;= lo) &#123;</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> lt = lo, i = lo+<span class="number">1</span>, gt = hi;</span><br><span class="line">	<span class="keyword">int</span> v=a[lo];</span><br><span class="line">	<span class="keyword">while</span>(i &lt;= gt)&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[i] &lt; v) &#123;<span class="comment">//第一种情况</span></span><br><span class="line">			swap(a, lt++, i++);</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> (a[i] &gt; v) &#123;<span class="comment">//第二种情况</span></span><br><span class="line">			swap(a, i, gt--);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;<span class="comment">//第三种情况</span></span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">	quickSort(a, lo, lt - <span class="number">1</span>);</span><br><span class="line">	quickSort(a, gt + <span class="number">1</span>, hi);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;这段排序代码的切分能够将和切分元素相等的元素归位，这样它们就不会被包含在递归调用处理的子数组中立了。对于存在大量重复元素的数组，这种方法比标准的快速排序的效率高得多。</p>
 <h1 id="一些简单说明以及常用函数"><a href="#一些简单说明以及常用函数" class="headerlink" title="一些简单说明以及常用函数"></a>一些简单说明以及常用函数</h1>
       
 
@@ -592,11 +633,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Algorithm</a>
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color5">Algorithm</a>
               </li>
             
             <div class="clearfix"></div>
