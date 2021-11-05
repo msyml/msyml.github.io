@@ -1,0 +1,1 @@
+const e={key:"v-086dc1c8",path:"/code/javascript/axios.html",title:"Axios",lang:"en-US",frontmatter:{},excerpt:"",headers:[],filePathRelative:"code/javascript/axios.md",git:{updatedTime:163608468e4,contributors:[{name:"chenhai",email:"chenhai@lonsid.cn",commits:1}]}};export{e as data};

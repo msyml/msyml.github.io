@@ -1,0 +1,1 @@
+const e={key:"v-2dee864a",path:"/code/vue/vuepress.html",title:"VuePress",lang:"en-US",frontmatter:{},excerpt:"",headers:[],filePathRelative:"code/vue/vuepress.md",git:{updatedTime:163608468e4,contributors:[{name:"chenhai",email:"chenhai@lonsid.cn",commits:1}]}};export{e as data};
