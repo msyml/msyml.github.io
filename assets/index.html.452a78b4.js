@@ -1,0 +1,15 @@
+import{d as n}from"./app.2450d0e1.js";import{_ as s}from"./plugin-vue_export-helper.5a098b48.js";const a={},p=n(`<h1 id="python" tabindex="-1"><a class="header-anchor" href="#python" aria-hidden="true">#</a> python</h1><h2 id="day-1" tabindex="-1"><a class="header-anchor" href="#day-1" aria-hidden="true">#</a> Day 1</h2><p>\u4E00\u6BB5\u6709\u8DA3\u7684\u4EE3\u7801</p><div class="language-python ext-py line-numbers-mode"><pre class="language-python"><code><span class="token keyword">import</span> turtle
+
+turtle<span class="token punctuation">.</span>pensize<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+turtle<span class="token punctuation">.</span>pencolor<span class="token punctuation">(</span><span class="token string">&#39;red&#39;</span><span class="token punctuation">)</span>
+
+turtle<span class="token punctuation">.</span>forward<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+turtle<span class="token punctuation">.</span>right<span class="token punctuation">(</span><span class="token number">90</span><span class="token punctuation">)</span>
+turtle<span class="token punctuation">.</span>forward<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+turtle<span class="token punctuation">.</span>right<span class="token punctuation">(</span><span class="token number">90</span><span class="token punctuation">)</span>
+turtle<span class="token punctuation">.</span>forward<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+turtle<span class="token punctuation">.</span>right<span class="token punctuation">(</span><span class="token number">90</span><span class="token punctuation">)</span>
+turtle<span class="token punctuation">.</span>forward<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+
+turtle<span class="token punctuation">.</span>mainloop<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>\u6D77\u9F9F\u7ED8\u56FE\uFF0C<code>forward()</code>\u524D\u8FDB\u5BF9\u5E94\u50CF\u7D20\u70B9\uFF0C<code>right()</code>\u53F3\u8F6C\u5BF9\u5E94\u89D2\u5EA6\uFF0C<code>mainloop()</code>\u7ED8\u56FE\u7ED3\u675F\u3002</p>`,5);function t(e,c){return p}var r=s(a,[["render",t]]);export{r as default};

@@ -1,0 +1,1 @@
+const t={key:"v-fb5c6e0c",path:"/softTest/",title:"",lang:"en-US",frontmatter:{},excerpt:"",headers:[],filePathRelative:"softTest/README.md",git:{updatedTime:1638406389e3,contributors:[{name:"msyml",email:"18858713997@163.com",commits:1}]}};export{t as data};

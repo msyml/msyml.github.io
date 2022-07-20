@@ -1,0 +1,1 @@
+const e={key:"v-b72643ac",path:"/code/python/",title:"python",lang:"en-US",frontmatter:{},excerpt:"",headers:[{level:2,title:"Day 1",slug:"day-1",children:[]}],filePathRelative:"code/python/README.md",git:{updatedTime:1654677994e3,contributors:[{name:"msyml",email:"18858713997@163.com",commits:1}]}};export{e as data};

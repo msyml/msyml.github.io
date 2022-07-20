@@ -1,0 +1,1 @@
+const t={key:"v-def710a4",path:"/tool/qinglong.html",title:"\u9752\u9F99\u9762\u677F",lang:"en-US",frontmatter:{},excerpt:"",headers:[],filePathRelative:"tool/qinglong.md",git:{updatedTime:1654436755e3,contributors:[{name:"msyml",email:"18858713997@163.com",commits:1}]}};export{t as data};
